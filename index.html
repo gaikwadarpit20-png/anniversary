@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Happy 4th Anniversary Sudhiksha ❤️</title>
 
 <style>
 
+/* BODY */
+
 body{
 margin:0;
-font-family:Arial;
+padding:0;
 overflow:hidden;
-text-align:center;
+font-family:Arial;
 background:black;
 }
 
@@ -31,21 +34,23 @@ z-index:20;
 backdrop-filter:blur(5px);
 }
 
-/* SLIDESHOW */
+/* SLIDESHOW FULL SCREEN */
 
 #slideshow{
 position:fixed;
 top:0;
 left:0;
-width:100%;
-height:100%;
-z-index:-1;
+width:100vw;
+height:100vh;
+z-index:-2;
 }
 
 .slide{
-position:absolute;
-width:100%;
-height:100%;
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
 object-fit:cover;
 opacity:0;
 transition:opacity 2s;
@@ -55,19 +60,19 @@ transition:opacity 2s;
 opacity:0.6;
 }
 
-/* INTRO */
+/* INTRO SCREEN */
 
 #introScreen{
 position:fixed;
 top:0;
 left:0;
-width:100%;
-height:100%;
+width:100vw;
+height:100vh;
 background:black;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:1000;
+z-index:100;
 animation:fadeOut 3s forwards;
 animation-delay:4s;
 }
@@ -90,21 +95,63 @@ animation:introAnim 4s forwards;
 to{opacity:0;visibility:hidden;}
 }
 
-/* PASSWORD */
+/* PASSWORD SCREEN */
 
 #passwordScreen{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:50;
+}
+
+/* GLASS PASSWORD BOX */
+
+#passwordBox{
+background:rgba(255,255,255,0.15);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+box-shadow:0 0 30px rgba(0,0,0,0.3);
+text-align:center;
 color:white;
-z-index:5;
+animation:fadeIn 1.5s ease;
+}
+
+#passwordBox input{
+padding:12px;
+border:none;
+border-radius:10px;
+margin-top:10px;
+width:200px;
+font-size:16px;
+outline:none;
+}
+
+#passwordBox button{
+margin-top:15px;
+padding:10px 25px;
+border:none;
+border-radius:10px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 /* ENVELOPE */
 
 .envelope{
-position:absolute;
+position:fixed;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
@@ -113,7 +160,7 @@ height:140px;
 background:#ff4d6d;
 border-radius:10px;
 cursor:pointer;
-z-index:5;
+z-index:30;
 }
 
 .envelope:before{
@@ -128,7 +175,7 @@ top:0;
 /* LETTER */
 
 .letter{
-position:absolute;
+position:fixed;
 top:50%;
 left:50%;
 transform:translate(-50%,50%) scale(0.5);
@@ -142,7 +189,7 @@ width:85%;
 max-width:400px;
 height:60%;
 overflow:auto;
-z-index:10;
+z-index:40;
 }
 
 .showLetter{
@@ -166,7 +213,7 @@ white-space:nowrap;
 /* HEARTS */
 
 .heart{
-position:absolute;
+position:fixed;
 bottom:-10px;
 font-size:20px;
 animation:float 6s linear infinite;
@@ -210,9 +257,11 @@ display:none;
 
 <!-- PASSWORD -->
 <div id="passwordScreen">
+<div id="passwordBox">
 <h2>Enter Password ❤️</h2>
-<input type="password" id="passwordInput">
-<button onclick="checkPassword()">Enter</button>
+<input type="password" id="passwordInput" placeholder="Enter here">
+<button onclick="checkPassword()">Unlock</button>
+</div>
 </div>
 
 <!-- ENVELOPE -->
@@ -228,7 +277,7 @@ display:none;
 
 /* LOVE TIMER */
 
-let startDate=new Date("Feb 26, 2022 00:00:00");
+let startDate=new Date("Feb 26, 2022");
 
 function updateLoveTimer(){
 
@@ -243,12 +292,8 @@ let minutes=Math.floor((diff/(1000*60))%60);
 let seconds=Math.floor((diff/1000)%60);
 
 loveTimer.innerHTML=
-"Together for "+
-years+" Years "+
-remainingDays+" Days "+
-hours+"h "+
-minutes+"m "+
-seconds+"s ❤️";
+"Together for "+years+" Years "+remainingDays+
+" Days "+hours+"h "+minutes+"m "+seconds+"s ❤️";
 
 }
 
@@ -299,7 +344,7 @@ setInterval(()=>{
 let heart=document.createElement("div");
 heart.innerHTML="❤️";
 heart.className="heart";
-heart.style.left=Math.random()*100+"%";
+heart.style.left=Math.random()*100+"vw";
 document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),6000);
 },300);
@@ -310,18 +355,16 @@ setTimeout(()=>heart.remove(),6000);
 /* OPEN LETTER */
 
 function openLetter(){
-
 letter.classList.add("showLetter");
 startLetterTyping();
-
 }
 
 
-/* LETTER */
+/* LETTER TEXT */
 
 let message=`Happy 4th Anniversary Sudhiksha ❤️
 
-You are my happiness, my peace, my everything.
+You are my happiness, my peace, and my everything.
 
 Forever yours.`;
 
@@ -333,16 +376,12 @@ function startLetterTyping(){
 function type(){
 
 if(i<message.length){
-
 letterText.innerHTML+=message.charAt(i);
 i++;
 setTimeout(type,35);
-
 }
 else{
-
 startSignature();
-
 }
 
 }
@@ -362,16 +401,12 @@ let i=0;
 let sign=setInterval(()=>{
 
 if(i<text.length){
-
 signature.style.width=(i+1)+"ch";
 i++;
-
 }
 else{
-
 clearInterval(sign);
 signature.style.borderRight="none";
-
 }
 
 },150);
