@@ -3,419 +3,339 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Happy 4th Anniversary Sudhiksha ❤️</title>
+<title>Happy Anniversary ❤️</title>
 
 <style>
-
-/* BODY */
-
 body{
 margin:0;
 padding:0;
-overflow:hidden;
+background:linear-gradient(to bottom,#ffd6e7,#fff);
 font-family:Arial;
-background:black;
-}
-
-/* LOVE TIMER */
-
-#loveTimer{
-position:fixed;
-top:15px;
-left:50%;
-transform:translateX(-50%);
-color:white;
-font-size:18px;
-background:rgba(0,0,0,0.4);
-padding:8px 18px;
-border-radius:20px;
-z-index:20;
-backdrop-filter:blur(5px);
-}
-
-/* SLIDESHOW FULL SCREEN */
-
-#slideshow{
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
-z-index:-2;
-}
-
-.slide{
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
-object-fit:cover;
-opacity:0;
-transition:opacity 2s;
-}
-
-.active{
-opacity:0.6;
-}
-
-/* INTRO SCREEN */
-
-#introScreen{
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:100;
-animation:fadeOut 3s forwards;
-animation-delay:4s;
-}
-
-#introText{
-font-size:42px;
-color:white;
-opacity:0;
-transform:scale(0.5);
-animation:introAnim 4s forwards;
-}
-
-@keyframes introAnim{
-0%{opacity:0;transform:scale(0.5);}
-50%{opacity:1;transform:scale(1.2);text-shadow:0 0 30px pink;}
-100%{opacity:1;transform:scale(1);}
-}
-
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
-
-/* PASSWORD SCREEN */
-
-#passwordScreen{
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:50;
-}
-
-/* GLASS PASSWORD BOX */
-
-#passwordBox{
-background:rgba(255,255,255,0.15);
-padding:30px;
-border-radius:20px;
-backdrop-filter:blur(15px);
-box-shadow:0 0 30px rgba(0,0,0,0.3);
+overflow:hidden;
 text-align:center;
-color:white;
-animation:fadeIn 1.5s ease;
 }
 
-#passwordBox input{
-padding:12px;
-border:none;
-border-radius:10px;
-margin-top:10px;
-width:200px;
-font-size:16px;
-outline:none;
-}
-
-#passwordBox button{
-margin-top:15px;
-padding:10px 25px;
-border:none;
-border-radius:10px;
-background:#ff4d6d;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(30px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-/* ENVELOPE */
-
-.envelope{
+/* floating hearts */
+.heart{
 position:fixed;
+color:red;
+font-size:18px;
+animation:float linear infinite;
+opacity:0.7;
+}
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+/* cinematic flash */
+#flash{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+background:white;
+opacity:0;
+pointer-events:none;
+z-index:999;
+}
+.flashActive{
+animation:flashAnim 0.8s ease;
+}
+@keyframes flashAnim{
+0%{opacity:0;}
+30%{opacity:0.9;}
+100%{opacity:0;}
+}
+
+/* falling roses */
+.rose{
+position:fixed;
+top:-50px;
+font-size:24px;
+animation:fall linear forwards;
+z-index:99;
+}
+@keyframes fall{
+0%{transform:translateY(-50px) rotate(0deg);opacity:1;}
+100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+
+/* images */
+#photo,#slide{
+width:280px;
+height:380px;
+object-fit:cover;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+margin-top:40px;
+display:none;
+animation:fadeZoom 1s;
+}
+@keyframes fadeZoom{
+from{opacity:0; transform:scale(0.8);}
+to{opacity:1; transform:scale(1);}
+}
+
+/* zoom effect */
+.zoomEffect{
+animation:slowZoom 8s ease-in-out forwards;
+}
+@keyframes slowZoom{
+0%{transform:scale(1);}
+100%{transform:scale(1.15);}
+}
+
+/* glowing border */
+.photoGlow{
+animation:glowBorder 2s infinite alternate;
+border-radius:20px;
+}
+@keyframes glowBorder{
+0%{box-shadow:0 0 10px #ff4d88,0 0 20px #ff4d88;}
+100%{box-shadow:0 0 25px #ff4d88,0 0 50px #ff4d88,0 0 80px #ff4d88;}
+}
+
+/* heartbeat */
+.heartbeat{
+animation:heartbeatAnim 1s infinite;
+}
+@keyframes heartbeatAnim{
+0%{transform:scale(1);}
+25%{transform:scale(1.05);}
+40%{transform:scale(1);}
+60%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
+/* letter */
+#letterBox{
+display:none;
+width:85%;
+max-width:340px;
+margin:30px auto;
+padding:20px;
+background:white;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+min-height:200px;
+position:relative;
+z-index:10;
+}
+#letterText{
+font-size:18px;
+line-height:1.6;
+white-space:pre-line;
+}
+
+/* final glowing message */
+#finalMsg{
+display:none;
+position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:220px;
-height:140px;
-background:#ff4d6d;
-border-radius:10px;
-cursor:pointer;
-z-index:30;
+font-size:34px;
+font-weight:bold;
+text-align:center;
+color:#ff2e63;
+text-shadow:
+0 0 10px #ff2e63,
+0 0 20px #ff2e63,
+0 0 40px #ff2e63,
+0 0 60px #ff2e63;
+animation:glowFade 2s ease, glowPulse 2s infinite alternate;
+z-index:10;
+}
+@keyframes glowFade{
+from{opacity:0; transform:translate(-50%,-40%) scale(0.8);}
+to{opacity:1; transform:translate(-50%,-50%) scale(1);}
+}
+@keyframes glowPulse{
+from{text-shadow:0 0 10px #ff2e63,0 0 20px #ff2e63,0 0 40px #ff2e63;}
+to{text-shadow:0 0 20px #ff2e63,0 0 40px #ff2e63,0 0 80px #ff2e63;}
 }
 
-.envelope:before{
-content:'';
-position:absolute;
-border-left:110px solid transparent;
-border-right:110px solid transparent;
-border-bottom:70px solid #ff758c;
+/* cinematic focus blur */
+.focusMode{
+position:fixed;
 top:0;
+left:0;
+width:100vw;
+height:100vh;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(6px);
+z-index:5;
+animation:fadeIn 1s ease;
 }
+@keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
 
-/* LETTER */
-
-.letter{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,50%) scale(0.5);
-background:white;
-color:black;
-padding:20px;
-border-radius:12px;
-opacity:0;
-transition:1s;
-width:85%;
-max-width:400px;
-height:60%;
-overflow:auto;
-z-index:40;
-}
-
-.showLetter{
-transform:translate(-50%,-120%) scale(1);
-opacity:1;
-}
-
-/* SIGNATURE */
-
-#signature{
+/* button */
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff4d88;
+color:white;
 margin-top:20px;
-text-align:right;
-font-size:28px;
-color:#e63946;
-border-right:3px solid #e63946;
-width:0;
-overflow:hidden;
-white-space:nowrap;
-}
-
-/* HEARTS */
-
-.heart{
-position:fixed;
-bottom:-10px;
-font-size:20px;
-animation:float 6s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-100vh);}
-}
-
-.hidden{
-display:none;
 }
 
 </style>
 </head>
-
 <body>
 
-<!-- LOVE TIMER -->
-<div id="loveTimer"></div>
+<img id="photo" src="photo1.jpg">
+<div id="letterBox"><div id="letterText"></div></div>
+<img id="slide">
+<div id="finalMsg">Sudhiksha,<br>I Love You Forever ❤️</div>
+<div id="focusOverlay" style="display:none;"></div>
+<div id="flash"></div>
 
-<!-- SLIDESHOW -->
-<div id="slideshow">
-<img src="photo1.jpg" class="slide active">
-<img src="photo2.jpg" class="slide">
-<img src="photo3.jpg" class="slide">
-<img src="photo4.jpg" class="slide">
-<img src="photo5.jpg" class="slide">
-</div>
+<br><button onclick="nextStep()">Next ❤️</button>
 
-<!-- INTRO -->
-<div id="introScreen">
-<div id="introText">Arpit ❤️ Sudhiksha</div>
-</div>
-
-<!-- MUSIC -->
 <audio id="music" loop>
 <source src="song.mp3" type="audio/mp3">
 </audio>
 
-<!-- PASSWORD -->
-<div id="passwordScreen">
-<div id="passwordBox">
-<h2>Enter Password ❤️</h2>
-<input type="password" id="passwordInput" placeholder="Enter here">
-<button onclick="checkPassword()">Unlock</button>
-</div>
-</div>
-
-<!-- ENVELOPE -->
-<div id="envelope" class="envelope hidden" onclick="openLetter()"></div>
-
-<!-- LETTER -->
-<div id="letter" class="letter">
-<p id="letterText"></p>
-<div id="signature">Arpit ❤️</div>
-</div>
-
 <script>
 
-/* LOVE TIMER */
+/* autoplay music */
+document.body.addEventListener("click",()=>{document.getElementById("music").play();},{once:true});
 
-let startDate=new Date("Feb 26, 2022");
-
-function updateLoveTimer(){
-
-let now=new Date();
-let diff=now-startDate;
-
-let days=Math.floor(diff/(1000*60*60*24));
-let years=Math.floor(days/365);
-let remainingDays=days%365;
-let hours=Math.floor((diff/(1000*60*60))%24);
-let minutes=Math.floor((diff/(1000*60))%60);
-let seconds=Math.floor((diff/1000)%60);
-
-loveTimer.innerHTML=
-"Together for "+years+" Years "+remainingDays+
-" Days "+hours+"h "+minutes+"m "+seconds+"s ❤️";
-
-}
-
-setInterval(updateLoveTimer,1000);
-updateLoveTimer();
-
-
-/* INTRO REMOVE */
-
-setTimeout(()=>{
-introScreen.style.display="none";
-},7000);
-
-
-/* SLIDESHOW */
-
-let slides=document.querySelectorAll(".slide");
-let index=0;
-
-setInterval(()=>{
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
-slides[index].classList.add("active");
-},4000);
-
-
-/* PASSWORD */
-
-function checkPassword(){
-
-if(passwordInput.value==="Us"){
-
-passwordScreen.style.display="none";
-envelope.classList.remove("hidden");
-music.play();
-startHearts();
-
-}
-
-}
-
-
-/* HEARTS */
-
-function startHearts(){
-
-setInterval(()=>{
+/* floating hearts */
+function createHeart(){
 let heart=document.createElement("div");
-heart.innerHTML="❤️";
 heart.className="heart";
+heart.innerHTML="❤️";
 heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),6000);
+setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,300);
+
+/* falling roses */
+function createRose(){
+let rose=document.createElement("div");
+rose.className="rose";
+rose.innerHTML="🌹";
+rose.style.left=Math.random()*100+"vw";
+rose.style.animationDuration=(4+Math.random()*3)+"s";
+document.body.appendChild(rose);
+setTimeout(()=>rose.remove(),7000);
+}
+function startRoses(){setInterval(createRose,300);}
+
+/* flash effect */
+function flashTransition(){
+let flash=document.getElementById("flash");
+flash.classList.add("flashActive");
+setTimeout(()=>{flash.classList.remove("flashActive");},800);
+}
+
+/* steps */
+let step=0;
+function nextStep(){
+flashTransition();
+setTimeout(()=>{
+if(step==0) showPhoto();
+else if(step==1) showLetter();
+else if(step==2) startSlideshow();
+step++;
 },300);
-
 }
 
+/* show photo */
+function showPhoto(){document.getElementById("photo").style.display="block";}
 
-/* OPEN LETTER */
+/* full anniversary letter */
+let message=`I’m writing this because sometimes, when I look at you, my heart feels so full that my breath catches in my throat, and I can’t find the words to say what you deserve to hear.
 
-function openLetter(){
-letter.classList.add("showLetter");
-startLetterTyping();
-}
+Before you walked into my life, I was just moving through the days. I didn't realize I was waiting for someone until I met you. You didn't just become a part of my life; you became the very air in my lungs. You are the first thing I want to wake up to and the last thing I want to think about before I close my eyes.
 
+There are moments that play on a loop in my head:
+The way you [mention a specific way she looks at you] that makes me feel like the only person in the world.
+The way you held me when I was at my lowest, without judgment, just pure, selfless love.
+The tiny, quiet moments—like us just sitting in silence—where I realize that I finally know what "home" feels like.
 
-/* LETTER TEXT */
+I know I’m not perfect. I know I’m human and I make mistakes. But the way you love me—with all your grace, your patience, and your beautiful, soft heart—it makes me want to be a man who deserves you. It’s a love I never thought I’d find, and I spend every day terrified and amazed that you chose me.
 
-let message=`Happy 4th Anniversary Sudhiksha ❤️
+If the world ended tomorrow, my only regret would be that I didn't have more lifetimes to give to you. One life isn't enough to show you how much you've healed me. One life isn't enough to thank you for the way you’ve changed the very DNA of who I am.
 
-You are my happiness, my peace, and my everything.
+You are my miracle. You are my greatest blessing. Thank you for staying. Thank you for loving the parts of me I haven't even learned to love myself yet.
 
-Forever yours.`;
-
+Happy Anniversary, my beautiful girl. I am yours, completely and forever, until my heart beats its very last.`;
 
 let i=0;
+function showLetter(){
+let photo=document.getElementById("photo");
+let box=document.getElementById("letterBox");
+let text=document.getElementById("letterText");
+let overlay=document.getElementById("focusOverlay");
 
-function startLetterTyping(){
+overlay.style.display="block";
+overlay.classList.add("focusMode");
 
-function type(){
+photo.style.display="block";
+box.style.display="block";
 
-if(i<message.length){
-letterText.innerHTML+=message.charAt(i);
-i++;
-setTimeout(type,35);
+photo.classList.add("zoomEffect","photoGlow","heartbeat");
+box.classList.add("heartbeat");
+
+text.innerHTML=""; i=0;
+
+let typing=setInterval(()=>{
+text.innerHTML+=message.charAt(i); i++;
+if(i>=message.length){
+clearInterval(typing);
+setTimeout(()=>{
+overlay.style.display="none";
+photo.classList.remove("zoomEffect","photoGlow","heartbeat");
+box.classList.remove("heartbeat");
+},1500);
 }
-else{
-startSignature();
-}
-
-}
-
-type();
-
-}
-
-
-/* SIGNATURE */
-
-function startSignature(){
-
-let text="Arpit ❤️";
-let i=0;
-
-let sign=setInterval(()=>{
-
-if(i<text.length){
-signature.style.width=(i+1)+"ch";
-i++;
-}
-else{
-clearInterval(sign);
-signature.style.borderRight="none";
+},40);
 }
 
-},150);
+/* slideshow */
+let photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg"];
+let index=0,count=0,show;
+function startSlideshow(){
+document.getElementById("letterBox").style.display="none";
+document.getElementById("photo").style.display="none";
+let slide=document.getElementById("slide");
+slide.style.display="block";
+slide.src=photos[0];
+show=setInterval(()=>{
+index++; count++;
+if(index>=photos.length) index=0;
+slide.src=photos[index];
+if(count>=photos.length){
+clearInterval(show);
+slide.style.display="none";
+flashTransition();
+setTimeout(()=>{
+document.getElementById("finalMsg").style.display="block";
+startRoses();
+replayStory();
+},300);
+}
+},2500);
+}
 
+/* auto replay */
+function replayStory(){
+setTimeout(()=>{
+document.getElementById("finalMsg").style.display="none";
+step=0; index=0; count=0; i=0;
+document.getElementById("photo").style.display="none";
+document.getElementById("letterBox").style.display="none";
+document.getElementById("slide").style.display="none";
+},8000);
 }
 
 </script>
-
 </body>
 </html>
-
-
